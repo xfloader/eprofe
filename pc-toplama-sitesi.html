@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ToplaPC | Bilgisayarını Topla</title>
+  <style>
+    :root { --bg:#08111f; --panel:#101d30; --panel2:#16263e; --text:#edf5ff; --muted:#9fb0c9; --accent:#62e4b9; --line:#29425f; --danger:#ff897e; }
+    * { box-sizing:border-box; } body { margin:0; font:16px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif; color:var(--text); background:radial-gradient(circle at 15% 0,#183a5a 0,transparent 29rem),var(--bg); }
+    header { max-width:1180px; margin:auto; padding:22px 24px; display:flex; align-items:center; justify-content:space-between; } .brand { font-size:24px; font-weight:850; letter-spacing:-1px; } .brand b { color:var(--accent); } nav a { color:var(--muted); margin-left:20px; text-decoration:none; font-size:14px; }
+    main { max-width:1180px; margin:auto; padding:25px 24px 64px; } .hero { padding:42px 0 30px; } .eyebrow { color:var(--accent); font-size:13px; font-weight:800; letter-spacing:1px; text-transform:uppercase; } h1 { font-size:clamp(34px,5vw,60px); line-height:1.06; letter-spacing:-2.5px; max-width:720px; margin:10px 0 14px; } .hero p { max-width:590px; color:var(--muted); font-size:18px; }
+    .layout { display:grid; grid-template-columns:minmax(0,1fr) 330px; gap:22px; align-items:start; } .card { background:linear-gradient(145deg,rgba(22,38,62,.95),rgba(13,26,45,.95)); border:1px solid var(--line); border-radius:18px; box-shadow:0 14px 35px rgba(0,0,0,.18); }
+    .builder { padding:8px 20px 20px; } .part { display:grid; grid-template-columns:42px 160px minmax(0,1fr) auto; gap:12px; align-items:center; padding:16px 0; border-bottom:1px solid rgba(159,176,201,.15); } .part:last-child { border:0; } .icon { width:38px;height:38px;display:grid;place-items:center;border-radius:11px;background:#203b58;font-size:20px; } .part label { font-weight:700; } select { width:100%; border:1px solid #3a5573; border-radius:10px; padding:11px; color:var(--text); background:#0b1728; font:inherit; } .price { color:var(--accent); font-weight:800; min-width:94px; text-align:right; } .catalog-browser { position:relative; } .part-search { width:100%; margin-bottom:6px; border:1px solid #3a5573; border-radius:9px; padding:9px 11px; color:var(--text); background:#0b1728; font:inherit; font-size:13px; } .search-results { position:absolute; z-index:5; width:100%; max-height:210px; overflow:auto; border:1px solid #3a5573; border-radius:9px; background:#102037; box-shadow:0 14px 30px rgba(0,0,0,.35); } .search-result { width:100%; text-align:left; padding:9px 11px; border:0; border-bottom:1px solid #29425f; border-radius:0; background:transparent; color:var(--text); font-size:13px; font-weight:600; } .search-result:hover { background:#1e3955; } .search-status { padding:9px 11px; color:var(--muted); font-size:12px; }
+    .summary { padding:22px; position:sticky; top:15px; } .summary h2,.ready h2 { font-size:20px; margin:0 0 16px; } .row { display:flex; justify-content:space-between; gap:12px; padding:8px 0; color:var(--muted); font-size:14px; } .row span:last-child { color:var(--text); } .total { margin:15px 0; padding:18px 0; border-top:1px solid var(--line); border-bottom:1px solid var(--line); display:flex; justify-content:space-between; align-items:baseline; } .total strong { font-size:26px; color:var(--accent); }
+    button { width:100%; padding:13px 16px; border:0; border-radius:10px; background:var(--accent); color:#06241d; font-weight:850; font-size:15px; cursor:pointer; } button:hover { filter:brightness(1.06); } .notice { margin-top:14px; padding:11px 12px; border-radius:9px; color:#b9cbdf; background:#0b1728; font-size:13px; } .notice.bad { color:#ffd0cc; background:#3a2024; }
+    .ready { margin-top:38px; } .ready-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; } .preset { padding:20px; } .tag { color:var(--accent); font-size:12px; font-weight:800; text-transform:uppercase; } .preset h3 { margin:8px 0 5px; font-size:19px; } .preset p { color:var(--muted); font-size:14px; margin:0 0 15px; } .preset button { background:#233e5b; color:var(--text); }
+    .compare { margin-top:22px; padding:22px; } .compare-head { display:flex; gap:16px; justify-content:space-between; align-items:flex-start; } .compare-head p { color:var(--muted); margin:5px 0 0; font-size:14px; } .compare-head button { width:auto; white-space:nowrap; } .coverage { display:flex; flex-wrap:wrap; gap:8px; margin:18px 0; } .coverage span { font-size:12px; color:#c8d9eb; background:#1d3550; border:1px solid #36536f; border-radius:99px; padding:5px 9px; } .offer { display:grid; grid-template-columns:1.5fr repeat(3,1fr); gap:12px; align-items:center; padding:14px 0; border-top:1px solid rgba(159,176,201,.15); font-size:14px; } .offer strong { display:block; } .offer small { color:var(--muted); } .best { color:var(--accent); font-weight:800; } .demo { color:#ffd384; font-size:12px; } @media (max-width:650px) { .offer { grid-template-columns:1fr 1fr; } .compare-head { flex-direction:column; } }
+    footer { text-align:center; color:var(--muted); font-size:13px; padding:26px; } @media (max-width:850px) { .layout { grid-template-columns:1fr; } .summary { position:static; } .ready-grid { grid-template-columns:1fr; } } @media (max-width:570px) { nav { display:none; } .part { grid-template-columns:42px 1fr; } .part select { grid-column:2; } .price { grid-column:2; text-align:left; } }
+  </style>
+</head>
+<body>
+  <header><div class="brand">Topla<b>PC</b></div><nav><a href="#topla">Sistem Topla</a><a href="#hazir">Hazır Sistemler</a><a href="#destek">Destek</a></nav></header>
+  <main>
+    <section class="hero"><div class="eyebrow">Kendi bilgisayarını kur</div><h1>İhtiyacına uygun bilgisayarı dakikalar içinde topla.</h1><p>Parçaları seç, bütçeni anında gör ve temel uyumluluk kontrolleriyle güvenle karar ver.</p></section>
+    <section class="card" style="padding:22px;margin-bottom:22px" aria-labelledby="recommendationTitle">
+      <h2 id="recommendationTitle" style="margin:0 0 6px">Sana uygun sistemi bulalım</h2>
+      <p style="margin:0 0 16px;color:var(--muted)">Bütçeni ve bilgisayarı hangi amaçla kullanacağını yaz; sana başlangıç sistemi önereceğiz.</p>
+      <div style="display:grid;grid-template-columns:1fr 1fr auto;gap:12px;align-items:end">
+        <label style="font-weight:700">Bütçen (₺)<input id="budget" type="number" min="10000" step="1000" placeholder="Örn. 35000" style="display:block;width:100%;margin-top:7px;border:1px solid #3a5573;border-radius:10px;padding:11px;color:var(--text);background:#0b1728;font:inherit"></label>
+        <label style="font-weight:700">Kullanım amacı<select id="purpose" style="display:block;margin-top:7px"><option value="gaming">Oyun</option><option value="work">İş / okul</option><option value="creator">Yayın / içerik üretimi</option></select></label>
+        <button onclick="recommendSystem()" style="min-width:180px">Sistem Öner</button>
+      </div>
+      <div id="recommendation" class="notice" style="display:none;margin-bottom:0"></div>
+    </section>
+    <section id="topla" class="layout">
+      <div class="card builder">
+        <div class="part"><div class="icon">🧠</div><label for="cpu">İşlemci</label><select id="cpu" data-part="İşlemci"><optgroup label="AMD Ryzen"><option value="6999" data-socket="AM5">AMD Ryzen 5 7600 — 6.999 ₺</option><option value="9499" data-socket="AM5">AMD Ryzen 5 7600X — 9.499 ₺</option><option value="11299" data-socket="AM5">AMD Ryzen 7 7700 — 11.299 ₺</option><option value="15500" data-socket="AM5">AMD Ryzen 7 7800X3D — 15.500 ₺</option><option value="23000" data-socket="AM5">AMD Ryzen 9 7900X — 23.000 ₺</option></optgroup><optgroup label="Intel Core"><option value="7999" data-socket="LGA1700">Intel Core i5-14400F — 7.999 ₺</option><option value="10499" data-socket="LGA1700">Intel Core i5-14600KF — 10.499 ₺</option><option value="16500" data-socket="LGA1700">Intel Core i7-14700KF — 16.500 ₺</option><option value="23999" data-socket="LGA1700">Intel Core i9-14900KF — 23.999 ₺</option></optgroup></select><span class="price"></span></div>
+        <div class="part"><div class="icon">🧩</div><label for="board">Anakart</label><select id="board" data-part="Anakart"><optgroup label="AMD AM5"><option value="4999" data-socket="AM5">MSI PRO B650M-B — 4.999 ₺</option><option value="5999" data-socket="AM5">ASUS TUF B650M-PLUS Wi‑Fi — 5.999 ₺</option><option value="7999" data-socket="AM5">Gigabyte B650 AORUS Elite AX — 7.999 ₺</option><option value="12499" data-socket="AM5">MSI MAG X670E Tomahawk — 12.499 ₺</option></optgroup><optgroup label="Intel LGA1700"><option value="5499" data-socket="LGA1700">ASRock B760M Pro RS — 5.499 ₺</option><option value="7499" data-socket="LGA1700">MSI PRO B760M-A Wi‑Fi — 7.499 ₺</option><option value="8999" data-socket="LGA1700">ASUS TUF B760-PLUS Wi‑Fi — 8.999 ₺</option><option value="13999" data-socket="LGA1700">Gigabyte Z790 AORUS Elite — 13.999 ₺</option></optgroup></select><span class="price"></span></div>
+        <div class="part"><div class="icon">🎮</div><label for="gpu">Ekran Kartı</label><select id="gpu" data-part="Ekran kartı">
+          <optgroup label="NVIDIA — giriş ve orta seviye"><option value="6500">ASUS ROG Strix GTX 1080 8 GB — 6.500 ₺</option><option value="13500">MSI Ventus RTX 5050 8 GB — 13.500 ₺</option><option value="14200">ASUS Dual RTX 5050 8 GB — 14.200 ₺</option><option value="17800">Gigabyte Windforce RTX 5060 8 GB — 17.800 ₺</option><option value="21400">MSI Gaming RTX 5060 Ti 16 GB — 21.400 ₺</option></optgroup>
+          <optgroup label="NVIDIA — yüksek performans"><option value="28500">ASUS Prime RTX 5070 12 GB — 28.500 ₺</option><option value="34900">MSI Ventus RTX 5070 Ti 16 GB — 34.900 ₺</option><option value="49500">ASUS TUF RTX 5080 16 GB — 49.500 ₺</option><option value="99000">MSI Suprim RTX 5090 32 GB — 99.000 ₺</option></optgroup>
+          <optgroup label="AMD Radeon"><option value="14500">Sapphire Pulse RX 7600 8 GB — 14.500 ₺</option><option value="19900">PowerColor RX 7700 XT 12 GB — 19.900 ₺</option><option value="26500">Sapphire Pulse RX 7800 XT 16 GB — 26.500 ₺</option><option value="36500">XFX Merc RX 7900 XT 20 GB — 36.500 ₺</option><option value="48500">Sapphire Nitro+ RX 7900 XTX 24 GB — 48.500 ₺</option></optgroup>
+        </select><span class="price"></span></div>
+        <div class="part"><div class="icon">⚡</div><label for="ram">Bellek</label><select id="ram" data-part="Bellek"><option value="2499">Kingston Fury 16 GB DDR5 5600 MHz — 2.499 ₺</option><option value="3299">Corsair Vengeance 16 GB DDR5 6000 MHz — 3.299 ₺</option><option value="4699">Kingston Fury 32 GB DDR5 5600 MHz — 4.699 ₺</option><option value="5399">G.Skill Ripjaws 32 GB DDR5 6000 MHz — 5.399 ₺</option><option value="7199">Corsair Vengeance RGB 32 GB DDR5 6400 MHz — 7.199 ₺</option><option value="9999">Kingston Fury 64 GB DDR5 6000 MHz — 9.999 ₺</option></select><span class="price"></span></div>
+        <div class="part"><div class="icon">💾</div><label for="ssd">NVMe SSD</label><select id="ssd" data-part="NVMe SSD"><option value="2199">Kingston NV3 1 TB — 2.199 ₺</option><option value="2499">WD Blue SN580 1 TB — 2.499 ₺</option><option value="2999">Samsung 990 EVO 1 TB — 2.999 ₺</option><option value="4399">Crucial P3 Plus 2 TB — 4.399 ₺</option><option value="5599">WD Black SN850X 2 TB — 5.599 ₺</option><option value="6999">Samsung 990 PRO 2 TB — 6.999 ₺</option></select><span class="price"></span></div>
+        <div class="part"><div class="icon">🗃️</div><label for="hdd">Ek HDD</label><select id="hdd" data-part="Ek depolama"><option value="0">Ekleme — 0 ₺</option><option value="1899">Seagate Barracuda 1 TB — 1.899 ₺</option><option value="2499">WD Blue 2 TB — 2.499 ₺</option><option value="4399">Seagate IronWolf 4 TB — 4.399 ₺</option></select><span class="price"></span></div>
+        <div class="part"><div class="icon">❄️</div><label for="cooler">İşlemci Soğutucu</label><select id="cooler" data-part="İşlemci soğutucu"><option value="0">Stok soğutucu — 0 ₺</option><option value="999">DeepCool AG400 — 999 ₺</option><option value="1299">Thermalright Assassin X 120 — 1.299 ₺</option><option value="2299">be quiet! Pure Rock 2 — 2.299 ₺</option><option value="3999">MSI MAG CoreLiquid 240R — 3.999 ₺</option><option value="6299">Corsair iCUE H100i 240 mm — 6.299 ₺</option></select><span class="price"></span></div>
+        <div class="part"><div class="icon">🔋</div><label for="psu">Güç Kaynağı</label><select id="psu" data-part="Güç kaynağı"><option value="2299" data-watt="550">FSP HV Pro 550 W 80+ — 2.299 ₺</option><option value="2499" data-watt="650">Cooler Master MWE 650 W Bronze — 2.499 ₺</option><option value="3799" data-watt="750">Corsair RM750e 750 W Gold — 3.799 ₺</option><option value="4899" data-watt="850">MSI MAG A850GL 850 W Gold — 4.899 ₺</option><option value="6999" data-watt="1000">Seasonic Focus GX 1000 W Gold — 6.999 ₺</option></select><span class="price"></span></div>
+        <div class="part"><div class="icon">🗄️</div><label for="case">Kasa</label><select id="case" data-part="Kasa"><option value="1799">Zalman i3 Neo mATX — 1.799 ₺</option><option value="1999">Cooler Master Q300L — 1.999 ₺</option><option value="3299">MSI MAG Forge 320R — 3.299 ₺</option><option value="4199">NZXT H5 Flow — 4.199 ₺</option><option value="5199">Corsair 4000D Airflow — 5.199 ₺</option><option value="7499">Lian Li Lancool 216 RGB — 7.499 ₺</option></select><span class="price"></span></div>
+        <div class="part"><div class="icon">🌬️</div><label for="fans">Kasa Fanı</label><select id="fans" data-part="Kasa fanı"><option value="0">Ekleme — 0 ₺</option><option value="699">Arctic P12 PWM 2'li — 699 ₺</option><option value="1499">Cooler Master SickleFlow 3'lü — 1.499 ₺</option><option value="3299">Corsair iCUE AF120 RGB 3'lü — 3.299 ₺</option></select><span class="price"></span></div>
+        <div class="part"><div class="icon">🖥️</div><label for="monitor">Monitör</label><select id="monitor" data-part="Monitör"><option value="0">Monitör ekleme — 0 ₺</option><option value="4999">AOC 24G4X 24 inç 180 Hz — 4.999 ₺</option><option value="5999">LG UltraGear 24GS60F 180 Hz — 5.999 ₺</option><option value="8999">Gigabyte G27Q 27 inç 2K 144 Hz — 8.999 ₺</option><option value="10999">MSI G274QPF 27 inç 2K 170 Hz — 10.999 ₺</option><option value="17999">ASUS TUF VG27AQML1A 260 Hz — 17.999 ₺</option></select><span class="price"></span></div>
+        <div class="part"><div class="icon">⌨️</div><label for="peripherals">Klavye ve mouse</label><select id="peripherals" data-part="Çevre birimleri"><option value="0">Ekleme — 0 ₺</option><option value="1099">Logitech MK270 klavye + mouse — 1.099 ₺</option><option value="1599">Rampage mekanik set — 1.599 ₺</option><option value="2899">HyperX Alloy Core + Pulsefire — 2.899 ₺</option><option value="4299">Logitech G Pro mekanik + G305 — 4.299 ₺</option><option value="6999">Razer BlackWidow + Basilisk set — 6.999 ₺</option></select><span class="price"></span></div>
+      </div>
+      <aside class="card summary"><h2>Topladığın Sistem</h2><div id="summaryRows"></div><div class="total"><span>Toplam</span><strong id="total">0 ₺</strong></div><button onclick="alert('Sisteminiz sepete eklendi!')">Sepete Ekle</button><div id="notice" class="notice">✓ Parçalar birbiriyle uyumlu görünüyor.</div></aside>
+    </section>
+    <section class="card compare" aria-labelledby="compareTitle">
+      <div class="compare-head"><div><h2 id="compareTitle" style="margin:0">Mağaza fiyat karşılaştırması</h2><p>Seçtiğin her parça için en uygun teklifi bulur; stok ve satıcı bilgisiyle sıralar.</p></div><button onclick="renderOffers()">Fiyatları Karşılaştır</button></div>
+      <div class="coverage"><span>İtopya</span><span>İncehesap</span><span>Sinerji</span><span>Teknobiyotik</span><span>Gaming.Gen.TR</span><span>Vatan</span><span>MediaMarkt</span><span>Teknosa</span><span>Amazon Türkiye</span><span>Hepsiburada</span><span>Trendyol</span><span>N11</span></div>
+      <div id="offerList" class="notice">Fiyat karşılaştırması için “Fiyatları Karşılaştır” düğmesine bas.</div>
+    </section>
+    <section id="hazir" class="ready"><h2>Hazır başlangıç sistemleri</h2><div class="ready-grid"><article class="card preset"><div class="tag">Giriş seviyesi</div><h3>Oyun Başlangıç</h3><p>1080p oyunlar ve günlük kullanım için dengeli sistem.</p><button onclick="setPreset('entry')">Bu sistemi yükle</button></article><article class="card preset"><div class="tag">En popüler</div><h3>Performans Oyuncu</h3><p>Yüksek ayarlarda akıcı 1440p oyun deneyimi.</p><button onclick="setPreset('gaming')">Bu sistemi yükle</button></article><article class="card preset"><div class="tag">Üretkenlik</div><h3>İçerik Üretici</h3><p>Video düzenleme, tasarım ve çoklu görev için güçlü.</p><button onclick="setPreset('creator')">Bu sistemi yükle</button></article></div></section>
+  </main><footer id="destek">© 2026 ToplaPC — Hayalindeki sistemi kur.</footer>
+  <script>
+    const money = n => new Intl.NumberFormat('tr-TR').format(n) + ' ₺';
+    const selects = [...document.querySelectorAll('select')];
+    function update(){ let total=0, html=''; selects.forEach(s=>{const o=s.selectedOptions[0], value=Number(o.value); total+=value; s.parentElement.querySelector('.price').textContent=money(value); html+=`<div class="row"><span>${s.dataset.part}</span><span>${money(value)}</span></div>`}); document.querySelector('#summaryRows').innerHTML=html; document.querySelector('#total').textContent=money(total);
+      const cpu=document.querySelector('#cpu').selectedOptions[0].dataset.socket, board=document.querySelector('#board').selectedOptions[0].dataset.socket, gpu=Number(document.querySelector('#gpu').value), watt=Number(document.querySelector('#psu').selectedOptions[0].dataset.watt), notice=document.querySelector('#notice');
+      if(cpu!==board){notice.textContent='⚠ İşlemci ve anakart soketleri uyuşmuyor. Lütfen seçimleri değiştirin.';notice.className='notice bad'} else if(gpu>=25000 && watt<750){notice.textContent='⚠ Bu ekran kartı için en az 750 W güç kaynağı önerilir.';notice.className='notice bad'} else {notice.textContent='✓ Parçalar birbiriyle uyumlu görünüyor.';notice.className='notice'} }
+    function setPreset(type){
+      const choices={entry:{cpu:0,board:0,gpu:1,ram:0,ssd:0,hdd:0,cooler:0,psu:0,case:0,fans:0,monitor:0,peripherals:0},gaming:{cpu:1,board:0,gpu:6,ram:3,ssd:3,hdd:0,cooler:1,psu:2,case:2,fans:1,monitor:3,peripherals:2},creator:{cpu:1,board:0,gpu:7,ram:5,ssd:4,hdd:2,cooler:4,psu:3,case:3,fans:2,monitor:4,peripherals:3}};
+      selects.forEach(s=>s.selectedIndex=choices[type][s.id] ?? 0); update(); document.querySelector('#topla').scrollIntoView({behavior:'smooth'});
+    }
+    function recommendSystem(){
+      const budget=Number(document.querySelector('#budget').value), purpose=document.querySelector('#purpose').value, result=document.querySelector('#recommendation');
+      if(!budget){result.textContent='Lütfen bütçeni Türk lirası olarak gir.';result.className='notice bad';result.style.display='block';return;}
+      let preset, label;
+      if(budget<24000){preset='entry';label='Giriş seviyesi sistem'}
+      else if(purpose==='creator'){preset='creator';label='İçerik üretici sistemi'}
+      else if(purpose==='work'){preset=budget>=36000?'creator':'entry';label=budget>=36000?'Güçlü iş ve üretkenlik sistemi':'İş ve okul sistemi'}
+      else {preset=budget>=38000?'gaming':'entry';label=budget>=38000?'1440p oyuncu sistemi':'1080p oyuncu sistemi'}
+      setPreset(preset);
+      const actual=selects.reduce((sum,s)=>sum+Number(s.value),0), difference=budget-actual;
+      result.className=difference<0?'notice bad':'notice';
+      result.textContent=difference<0?`${label} seçildi. Bu kurulum bütçeni ${money(Math.abs(difference))} aşıyor; parçaları istersen birlikte azaltabiliriz.`:`${label} seçildi. Tahmini toplam ${money(actual)}; bütçende ${money(difference)} kalıyor.`;
+      result.style.display='block';
+      renderOffers();
+    }
+    const PRICE_API_URL=''; // Canlı sistemde buraya örn. https://alanadiniz.com/api/prices adresi eklenir.
+    const CATALOG_API_URL=''; // Canlı katalog için örn. https://alanadiniz.com/api/catalog adresi eklenir.
+    const retailers=['İtopya','İncehesap','Sinerji','Teknobiyotik','Gaming.Gen.TR','Vatan','MediaMarkt','Teknosa','Amazon Türkiye','Hepsiburada','Trendyol','N11'];
+    async function renderOffers(){
+      const list=document.querySelector('#offerList');
+      list.className=''; list.innerHTML='<div class="notice">Fiyatlar aranıyor…</div>';
+      const parts=selects.map(s=>({name:s.dataset.part,product:s.selectedOptions[0].text.split(' — ')[0],price:Number(s.value)}));
+      if(PRICE_API_URL){
+        try { const response=await fetch(`${PRICE_API_URL}?items=${encodeURIComponent(JSON.stringify(parts))}`); if(!response.ok) throw new Error(); const data=await response.json(); showOffers(data.items,false); return; }
+        catch(e) { list.innerHTML='<div class="notice bad">Canlı fiyat servisine ulaşılamadı. Lütfen daha sonra tekrar deneyin.</div>'; return; }
+      }
+      // Görsel önizleme: canlı sağlayıcı bağlanıncaya kadar örnek teklifler üretilir.
+      const demo=parts.map((part,index)=>{ const offers=[0,1,2].map((step)=>{const store=retailers[(index*3+step*4)%retailers.length], factor=[.98,1.02,1.06][step]; return {store,price:Math.round(part.price*factor/10)*10,stock:step===2?'Sınırlı stok':'Stokta'};}).sort((a,b)=>a.price-b.price); return {...part,offers}; });
+      showOffers(demo,true);
+    }
+    function showOffers(items,isDemo){
+      const list=document.querySelector('#offerList');
+      list.className='';
+      list.innerHTML=`${isDemo?'<div class="demo" style="margin:0 0 10px">Örnek fiyat görünümü — canlı fiyat sağlayıcısı bağlandığında gerçek teklifler burada yer alır.</div>':''}${items.map(item=>`<div class="offer"><div><strong>${item.name}</strong><small>${item.product}</small></div>${item.offers.slice(0,3).map((offer,i)=>`<div class="${i===0?'best':''}">${offer.store}<br><strong>${money(offer.price)}</strong><small>${offer.stock}</small></div>`).join('')}</div>`).join('')}<div class="notice" style="margin-bottom:0">Son kontrol: ${new Date().toLocaleString('tr-TR')}${isDemo?' · Önizleme verisi':''}</div>`;
+    }
+    function showSearchResults(container,select,items,isLive){
+      container.innerHTML='';
+      if(!items.length){const empty=document.createElement('div');empty.className='search-status';empty.textContent='Sonuç bulunamadı.';container.appendChild(empty);return;}
+      items.slice(0,8).forEach(item=>{const button=document.createElement('button');button.type='button';button.className='search-result';button.textContent=item.name+(item.price ? ' — '+money(item.price) : '');button.onclick=()=>{let option=[...select.options].find(o=>o.text.startsWith(item.name));if(!option){option=document.createElement('option');option.value=item.price||0;option.textContent=item.name+(item.price?' — '+money(item.price):'');select.appendChild(option);}select.value=option.value;select.dispatchEvent(new Event('change'));container.remove();};container.appendChild(button);});
+      const status=document.createElement('div');status.className='search-status';status.textContent=isLive?'Canlı mağaza kataloğu sonuçları':'Kayıtlı katalog sonuçları';container.appendChild(status);
+    }
+    async function searchPartCatalog(select,query,results){
+      const normalized=query.trim().toLocaleLowerCase('tr-TR');
+      if(normalized.length<2){results.remove();return;}
+      if(CATALOG_API_URL){
+        try {const response=await fetch(CATALOG_API_URL+'?category='+encodeURIComponent(select.id)+'&q='+encodeURIComponent(query)+'&inStock=true');if(!response.ok)throw new Error();const data=await response.json();showSearchResults(results,select,data.items||[],true);return;}
+        catch(error){results.innerHTML='<div class="search-status">Canlı katalog servisine ulaşılamadı.</div>';return;}
+      }
+      const local=[...select.options].filter(option=>option.text.toLocaleLowerCase('tr-TR').includes(normalized)).map(option=>({name:option.text.split(' — ')[0],price:Number(option.value)}));
+      showSearchResults(results,select,local,false);
+    }
+    function initializePartSearches(){
+      selects.forEach(select=>{const wrapper=document.createElement('div');wrapper.className='catalog-browser';const input=document.createElement('input');input.type='search';input.className='part-search';input.placeholder=select.dataset.part+' ara (ör. ASUS, RTX, Ryzen)';input.autocomplete='off';select.parentNode.insertBefore(wrapper,select);wrapper.appendChild(input);wrapper.appendChild(select);input.addEventListener('input',()=>{let results=wrapper.querySelector('.search-results');if(!results){results=document.createElement('div');results.className='search-results';wrapper.appendChild(results);}searchPartCatalog(select,input.value,results);});input.addEventListener('blur',()=>setTimeout(()=>wrapper.querySelector('.search-results')?.remove(),180));});
+    }
+    initializePartSearches(); selects.forEach(s=>s.addEventListener('change',update)); update();
+  </script>
+</body>
+</html>
